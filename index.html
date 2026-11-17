@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mokoa - HomeFix Kutus</title>
+    <link rel="icon" href="https://imgs.search.brave.com/LMBmGgm28nyGDIORm2yRp5elTKlXfqxkHah1Moju6dY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pY29u/cy5pY29uYXJjaGl2/ZS5jb20vaWNvbnMv/dWljb25zdG9jay9z/aG9wcGluZy1jYXJ0/LzEyOC9TaG9wcGlu/Z2NhcnQtMDEtaWNv/bi5wbmc" type="image/x-icon">   
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <!--NAVIGATION BAR-->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">Moko<span>a</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" data-page="home" class="active" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" data-page="services" onclick="showPage('services')">Services</a></li>
+                <li><a href="#" data-page="orders" onclick="showPage('orders')">Your Orders</a></li>
+                <li>
+                    <a href="#" data-page="cart" onclick="showPage('cart')" class="cart-icon">
+                        🛒 <span class="cart-badge" id="cartBadge">0</span>
+                    </a>
+                </li>
+                <li><a href="#" data-page="about" onclick="showPage('about')">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+
+    <!--PAGE 1: HOME-->
+    <div id="page-home" class="page active">
+        <section class="hero">
+            <h1>All Home Services In One Place</h1>
+            <p>Fast, Reliable, Affordable. Delivered to your door in Kutus.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for services, gas, water, repairs...">
+                <button onclick="showPage('services')">Search</button>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Flash Sales -->
+            <div class="flash-header">
+                <h2>⚡ Flash Sales</h2>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-box"><span id="hours">00</span><small>Hrs</small></div>
+                    <div class="countdown-box"><span id="minutes">00</span><small>Min</small></div>
+                    <div class="countdown-box"><span id="seconds">00</span><small>Sec</small></div>
+                </div>
+            </div>
+            <div class="grid" id="flashSalesGrid"></div>
+
+            <!-- Popular Services -->
+            <section style="margin-top: 60px;">
+                <div class="section-title">
+                    <h2>Popular Services</h2>
+                    <p>Most booked services in Kutus this week</p>
+                </div>
+                <div class="grid" id="popularGrid"></div>
+            </section>
+
+            <!-- Why Choose Us -->
+            <section style="margin-top: 60px;">
+                <div class="section-title">
+                    <h2>Why Choose HomeFix Kutus?</h2>
+                    <p>We make home management effortless</p>
+                </div>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🚀</div>
+                        <h3>Fast Delivery</h3>
+                        <p>Get your essentials delivered within 60 minutes in Kutus town and environs.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📱</div>
+                        <h3>M-Pesa Payment</h3>
+                        <p>Seamless and secure payments via M-Pesa. Pay on delivery or in advance.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🛡️</div>
+                        <h3>Verified Professionals</h3>
+                        <p>All our technicians and riders are background-checked and highly rated.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎧</div>
+                        <h3>Customer Support</h3>
+                        <p>24/7 local support team ready to help you via WhatsApp or phone call.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <!-- PAGE 2: SERVICES -->
+    <div id="page-services" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services Catalogue</h2>
+                <p>Everything you need for your home, in one place</p>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterServices('All')">All</button>
+                <button class="filter-btn" onclick="filterServices('Cleaning')">Cleaning</button>
+                <button class="filter-btn" onclick="filterServices('Gas & Water')">Gas & Water</button>
+                <button class="filter-btn" onclick="filterServices('Repairs')">Repairs</button>
+                <button class="filter-btn" onclick="filterServices('Moving')">Moving</button>
+                <button class="filter-btn" onclick="filterServices('Shopping')">Shopping</button>
+            </div>
+            <div class="grid" id="allServicesGrid"></div>
+        </div>
+    </div>
+
+
+    <!--PAGE 3: YOUR ORDERS-->
+    <div id="page-orders" class="page">
+        <div class="container">
+            <div class="section-title" style="text-align: left;">
+                <h2>Your Orders</h2>
+                <p>Track your deliveries and service appointments</p>
+            </div>
+            <div id="ordersContainer"></div>
+        </div>
+    </div>
+
+
+    <!--PAGE 4: MY CART-->
+    <div id="page-cart" class="page">
+        <div class="container">
+            <div class="section-title" style="text-align: left;">
+                <h2>My Cart</h2>
+                <p>Review your items before checkout</p>
+            </div>
+            <div id="cartContainer"></div>
+        </div>
+    </div>
+
+    <!--PAGE 5: ABOUT-->
+    <div id="page-about" class="page">
+        <div class="about-hero">
+            <h1>About Mokoa (HomeFix Kutus)</h1>
+            <p>Empowering Kutus households with reliable, on-demand home services.</p>
+        </div>
+        <div class="container">
+            <section style="margin-bottom: 60px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <h2 style="color: var(--primary); margin-bottom: 16px;">Our Mission</h2>
+                <p style="font-size: 1.1rem; color: var(--text-light);">To bridge the gap between households and essential home services in Kutus by providing a digital platform that guarantees speed, affordability, and trust. We believe every home deserves reliable support.</p>
+            </section>
+
+            <section style="margin-bottom: 60px;">
+                <div class="section-title"><h2>How It Works</h2></div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <h3>Choose a Service</h3>
+                        <p>Browse our wide range of home services, from gas refill to plumbing repairs.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <h3>Pay via M-Pesa</h3>
+                        <p>Securely checkout using M-Pesa. Pay on delivery or instantly via Lipa Na M-Pesa.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">3</div>
+                        <h3>We Deliver / Send Pro</h3>
+                        <p>Sit back! Our verified riders or professionals will arrive at your doorstep promptly.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 60px;">
+                <div class="section-title"><h2>Customer Care Support</h2></div>
+                <div class="benefits-grid">
+                    <div class="benefit-card"><div class="benefit-icon">📞</div><h3>Phone</h3><p>0798357449</p></div>
+                    <div class="benefit-card"><div class="benefit-icon">💬</div><h3>WhatsApp</h3><p>0798357449</p></div>
+                    <div class="benefit-card"><div class="benefit-icon">✉️</div><h3>Email</h3><p>support@mokoa.co.ke</p></div>
+                    <div class="benefit-card"><div class="benefit-icon">📍</div><h3>Location</h3><p>Kutus Town, along Kutus-Mjini Road</p></div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 60px;">
+                <div class="section-title"><h2>Frequently Asked Questions</h2></div>
+                <div id="faqContainer">
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">How fast is the delivery in Kutus? <span>▼</span></div>
+                        <div class="faq-a">We guarantee delivery within 60 minutes for standard items like gas and water within Kutus town and a 5km radius.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Are your technicians verified? <span>▼</span></div>
+                        <div class="faq-a">Yes, all our plumbers, electricians, and movers undergo strict background checks and skill assessments before joining our platform.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept? <span>▼</span></div>
+                        <div class="faq-a">We currently accept M-Pesa (Paybill and Till Number) and Cash on Delivery for select services.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Can I cancel an order? <span>▼</span></div>
+                        <div class="faq-a">Yes, you can cancel an order for free within 5 minutes of placing it. After that, a small cancellation fee may apply if the rider is already dispatched.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <div class="section-title"><h2>Send us Feedback</h2></div>
+                <form onsubmit="submitFeedback(event)">
+                    <div class="input-group"><label>Your Name</label><input type="text" required></div>
+                    <div class="input-group"><label>Email or Phone</label><input type="text" required></div>
+                    <div class="input-group"><label>Message</label><textarea rows="4" required></textarea></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Feedback</button>
+                </form>
+            </section>
+        </div>
+    </div>
+
+
+    <!--FOOTER-->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Mokoa</h4>
+                <p style="opacity: 0.8; font-size: 0.9rem;">Your trusted partner for all home services and essentials in Kutus. Fast, reliable, and affordable.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#" onclick="showPage('home')">Home</a></li>
+                    <li><a href="#" onclick="showPage('services')">Services</a></li>
+                    <li><a href="#" onclick="showPage('orders')">Your Orders</a></li>
+                    <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="#" onclick="showPage('services')">Gas & Water</a></li>
+                    <li><a href="#" onclick="showPage('services')">Repairs</a></li>
+                    <li><a href="#" onclick="showPage('services')">Cleaning</a></li>
+                    <li><a href="#" onclick="showPage('services')">Moving</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect With Us</h4>
+                <ul>
+                    <li>📞 0798357449</li>
+                    <li><a href="mailto:stephenmutua346@gmail.com">✉️ support@mokoa.co.ke</a></li>
+                    <li>📍 Kutus Town, Kenya</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Mokoa (HomeFix Kutus). All Rights Reserved.
+        </div>
+    </footer>
+</body>
+</html>
